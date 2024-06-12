@@ -6,13 +6,15 @@ import { address, people } from './data/data'
 </script>
 
 <template>
-
+ <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
   <h1>Name:{{ value.name }}</h1>
   <h1>date:{{ value.date }}</h1>
   <h1>Addres:{{ address }}</h1>
-  <section>
+  <section class="bg-red-100">
     <h1 style="text-align:center;margin:40px 0px;font-size:40px">Data Example</h1>
-    <section class="content">
+    <section class="content ">
       <section class="person"><img :src="people[0].image" alt="Jane Doe">
         <div>
           <h1>{{ people[0].name }}</h1>
