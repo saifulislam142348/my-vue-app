@@ -1,13 +1,68 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue';
 import value from './data/data'
+import { ref,reactive } from 'vue'
 import { address, people } from './data/data'
+
+const location = ref('Tangail')
+
+function changeEvent(event) {
+  location.value = event;
+}
+
+const activeIndex=ref(0);
+
+const details = reactive([
+  {
+    heading: "click now 1",
+    content: "Like Anakin said, it’s woooorking! All of our icons are now ready to do your project’s bidding. Learn how to add them to your Vue project and then use their power to bring order and style to your UI!",
+    isOpen: true
+  }, {
+    heading: "click now 2",
+    content: "Like Anakin said, it’s woooorking! All of our icons are now ready to do your project’s bidding. Learn how to add them to your Vue project and then use their power to bring order and style to your UI!",
+    isOpen: false
+  },
+  {
+    heading: "click now 3",
+    content: "Like Anakin said, it’s woooorking! All of our icons are now ready to do your project’s bidding. Learn how to add them to your Vue project and then use their power to bring order and style to your UI!",
+    isOpen: true
+  },
+]);
+
 
 </script>
 
 <template>
- <h1 class="text-3xl font-bold underline">
-    Hello world!
+
+  <div class="  p-3" v-for="detail in details">
+    <div    @click="detail.isOpen=!detail.isOpen" class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
+      <h1  >{{ detail.heading }}</h1>
+    </div>
+    <div class="px-5 pt-0 text-left" v-show="detail.isOpen">
+      <p>{{ detail.content }}</p>
+
+    </div>
+
+  </div>
+
+  <h2>one index open other index auto hidden processing</h2>
+  <div class="  p-3" v-for="(detail ,index) in details">
+    <div    @click="activeIndex=index" class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
+      <h1  >{{ detail.heading }}</h1>
+    </div>
+    <div class="px-5 pt-0 text-left" v-show="activeIndex==index">
+      <p>{{ detail.content }}</p>
+
+    </div>
+
+  </div>
+
+  <button class="btn" type="button" @click="changeEvent('Dhaka')"> Dhaka</button>
+
+  <button class="btn" type="button" @click="changeEvent('Tangail')"> Tangail</button>
+
+  <h1 class="text-3xl font-bold underline">
+    {{ location }}
   </h1>
   <h1>Name:{{ value.name }}</h1>
   <h1>date:{{ value.date }}</h1>
@@ -48,6 +103,12 @@ import { address, people } from './data/data'
 </template>
 
 <style scoped>
+.btn {
+  padding: 5px;
+  margin: 10px;
+  background-color: aqua;
+}
+
 .content {
   width: 100%;
   margin-right: auto;
