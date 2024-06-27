@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue';
 import value from './data/data'
-import { ref,reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import { address, people } from './data/data'
 
 const location = ref('Tangail')
@@ -9,8 +9,14 @@ const location = ref('Tangail')
 function changeEvent(event) {
   location.value = event;
 }
+const image=ref('');
 
-const activeIndex=ref(0);
+function imageEvent(event) {
+  image.value = event.image;
+
+}
+
+const activeIndex = ref(0);
 
 const details = reactive([
   {
@@ -35,8 +41,9 @@ const details = reactive([
 <template>
 
   <div class="  p-3" v-for="detail in details">
-    <div    @click="detail.isOpen=!detail.isOpen" class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
-      <h1  >{{ detail.heading }}</h1>
+    <div @click="detail.isOpen = !detail.isOpen"
+      class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
+      <h1>{{ detail.heading }}</h1>
     </div>
     <div class="px-5 pt-0 text-left" v-show="detail.isOpen">
       <p>{{ detail.content }}</p>
@@ -46,11 +53,12 @@ const details = reactive([
   </div>
 
   <h2>one index open other index auto hidden processing</h2>
-  <div class="  p-3" v-for="(detail ,index) in details">
-    <div    @click="activeIndex=index" class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
-      <h1  >{{ detail.heading }}</h1>
+  <div class="  p-3" v-for="(detail, index) in details">
+    <div @click="activeIndex = index"
+      class="bg-slate-700 text-white space-y-0.5 scroll-pb-0.5 cursor-pointer transition  hover:bg-current-500 flex space-x-4 px-5 h-15 items-center">
+      <h1>{{ detail.heading }}</h1>
     </div>
-    <div class="px-5 pt-0 text-left" v-show="activeIndex==index">
+    <div class="px-5 pt-0 text-left" v-show="activeIndex == index">
       <p>{{ detail.content }}</p>
 
     </div>
@@ -70,34 +78,18 @@ const details = reactive([
   <section class="bg-red-100">
     <h1 style="text-align:center;margin:40px 0px;font-size:40px">Data Example</h1>
     <section class="content ">
-      <section class="person"><img :src="people[0].image" alt="Jane Doe">
+      <section class="person" v-for="(data ,index) in people" :key="index">
+        <img :src="data.image" @click="imageEvent(data)" alt="Jane Doe">
         <div>
-          <h1>{{ people[0].name }}</h1>
-          <h2>{{ people[0].designation }}</h2>
-          <p>{{ people[0].location }}</p>
+          
+          <h1>{{ data.name }}</h1>
+          <h2>{{ data.designation }}</h2>
+          <p>{{ data.location }}</p>
         </div>
       </section>
-
-
-
-      <section class="person"><img :src="people[0].image" alt="Jane Doe">
-        <div>
-          <h1>{{ people[1].name }}</h1>
-          <h2>{{ people[1].designation }}</h2>
-          <p>{{ people[1].location }}</p>
-        </div>
+      <section style="padding: 10%;">
+        <img :src="image" alt="Jane Doe">
       </section>
-
-
-      <section class="person"><img :src="people[0].image" alt="Jane Doe">
-        <div>
-          <h1>{{ people[2].name }}</h1>
-          <h2>{{ people[2].designation }}</h2>
-          <p>{{ people[2].location }}</p>
-        </div>
-      </section>
-
-
     </section>
   </section>
 </template>
