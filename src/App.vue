@@ -9,7 +9,7 @@ const location = ref('Tangail')
 function changeEvent(event) {
   location.value = event;
 }
-const image=ref('');
+const image = ref('');
 
 function imageEvent(event) {
   image.value = event.image;
@@ -35,6 +35,18 @@ const details = reactive([
   },
 ]);
 
+// event modify
+const spaceTitle = ref('Space Count Vue 3');
+const space = ref(0);
+
+function spacePressed() {
+  space.value++;
+  spaceTitle.value = "Total Space Pressed :" + space.value;
+}
+function PressedWhat(event) {
+  space.value++;
+  spaceTitle.value = " Space Pressed Count  :"+" " + space.value+ "and Space Key :"+event.key;
+}
 
 </script>
 
@@ -78,10 +90,10 @@ const details = reactive([
   <section class="bg-red-100">
     <h1 style="text-align:center;margin:40px 0px;font-size:40px">Data Example</h1>
     <section class="content ">
-      <section class="person" v-for="(data ,index) in people" :key="index">
+      <section class="person" v-for="(data, index) in people" :key="index">
         <img :src="data.image" @click="imageEvent(data)" alt="Jane Doe">
         <div>
-          
+
           <h1>{{ data.name }}</h1>
           <h2>{{ data.designation }}</h2>
           <p>{{ data.location }}</p>
@@ -92,6 +104,26 @@ const details = reactive([
       </section>
     </section>
   </section>
+
+  <section class="p-5">
+    <form class="max-w-sm mx-auto">
+      <div class="mb-5">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ spaceTitle }}</label>
+        <input type="text" @keyup.space="spacePressed()" id="email"
+          class="bg-red-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="enter value" required />
+      </div>
+      <div class="mb-5">
+        <input type="text" @keyup="PressedWhat($event)" placeholder="Enter pressed key find" id="password"
+          class="bg-gray-50 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required />
+      </div>
+      <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+  </section>
+
+
 </template>
 
 <style scoped>
