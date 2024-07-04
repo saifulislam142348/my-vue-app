@@ -1,5 +1,5 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
+import vModelBinding from './components/vModelBinding.vue';
 import value from './data/data'
 import { ref, reactive } from 'vue'
 import { address, people } from './data/data'
@@ -123,7 +123,7 @@ function PressedWhat(event) {
     </form>
   </section>
 
-
+<vModelBinding/>
 </template>
 
 <style scoped>
