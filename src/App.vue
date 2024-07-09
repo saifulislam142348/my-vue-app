@@ -1,6 +1,7 @@
 <script setup>
 import vModelBinding from './components/vModelBinding.vue';
 import CheckBoxArray from './components/CheckBoxArray.vue';
+import quiz from './components/Quiz.vue';
 import value from './data/data'
 import { ref, reactive } from 'vue'
 import { address, people } from './data/data'
@@ -52,6 +53,7 @@ function PressedWhat(event) {
 </script>
 
 <template>
+  <quiz/>
 
   <div class="  p-3" v-for="detail in details">
     <div @click="detail.isOpen = !detail.isOpen"
